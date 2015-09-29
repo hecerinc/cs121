@@ -1,0 +1,110 @@
+%% Please fill in your name and collaboration statement here.
+\newcommand{\studentName}{Kevin Zhang}
+\newcommand{\collaborationStatement}{I collaborated on this assignment with Jason Shen and Tomoya Hasegawa, got help from no one else, and referred to nothing else.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[solution, letterpaper]{cs121}
+\usepackage{enumerate}
+\begin{document}
+\header{0}{Tuesday September 15, 2015 at 11:59pm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PART{Cecilia and Madhu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{2+2}{2 lines}
+Let $X$ and $Y$ be sets. Using set notation, give formal descriptions of the following sets:
+
+\subproblem The set of all nonempty subsets of $X$.
+\subproblem The difference between $X$ and $Y$, i.e. the set containing all elements of $X$ that are not elements of $Y$. (This is denoted $X \setminus Y$.)
+\\\\
+\noindent {\bf Solution.}
+\\(A). $A = \{x: x \in P(X), x \neq \emptyset\}$
+\\(B). $B = \{x: x \in X, x \notin Y\}$
+
+\problem{3+3}{1/4 page}
+Let $\mathbb{N} = \{0, 1, 2, ... \}$ be the set of natural numbers. For each of the following functions $f : \mathbb{N} \to \mathbb{N}$, state whether $f$ is (i) one-to-one/injective, (ii) onto/surjective, and/or (iii) bijective.
+
+\subproblem $f(x) = x!$
+
+\subproblem $f(x) = \begin{cases} 
+      x + 1 & \text{ if } x \text{ is even } \\
+      x - 1 & \text{ if } x \text{ is odd } \\
+   \end{cases}$
+\\\\
+\noindent {\bf Solution.}
+\\(A). $\textbf{None of the above.}$ $f(x) = x!$ is neither one-to-one ($0! = 1! = 1$) nor onto ($3$ does not equal the factorial of any natural number).  Thus, $f(x)=x!$ is none of (i), (ii), or (iii) (since (iii) is only true if both (i) and (ii) are as well).
+\\(B). $\textbf{All of the above.}$  $f(x)$ as given is one-to-one; assume that $f(x) = f(y)$, $x \neq y$.  Suppose that $x$ is even.  Then $f(x) = x+1$, which is odd.  There are two cases for $y$; assume $y$ is even.  Then $f(y) = y+1$, so $x+1 = y+1 \rightarrow x=y$, a contradiction.  Alternatively, $y$ may be odd, in which case $f(y) = y-1$ so $x+1 = y-1$.  But this tells us that $x$ and $y$ have the same parity when $x$ is even and $y$ is odd, a contradiction.  Similar logic follows for when $x$ is odd; hence, the function $f$ never maps two unequal inputs to the same value.
+\\\indent$f(x)$ is also onto; let $y \in \mathbb{N}$.  Suppose $y$ is even.  Then $f(y+1) = y$, so all even natural numbers are in the range of $f$.  Now suppose $y$ is odd.  Then $f(y-1) = y$, so all odd natural numbers are in the range of $f$.  It is easy to check that this works for the edge cases of $f(0)$ and $f(1) = 0$.  Hence, $f$ is onto.  We may therefore conclude that $f$ is all of (i), (ii), and (iii), since (iii) follows from (i) and (ii).
+
+\problem{6}{1/2 page}
+Consider the binary relation $\lesssim$ defined by $A \lesssim B$ if there exists a one-to-one (injective) function $f : A \to B$. Is $\lesssim$ reflexive? symmetric? transitive? Briefly justify your answers. Explain in simple terms what it means if $A \lesssim B$ and $B \lesssim A$.
+\\\\
+\noindent {\bf Solution.}
+The relation $\lesssim$ is reflexive; the identity function provides a one-to-one function from any set to itself.  The relation $\lesssim$ is NOT symmetric; consider the sets $A = \{1, 2\}$ and $B = \{1, 2, 3\}$.  There exists a one-to-one function from $A$ to $B$ (e.g. the identity function), but there is no one-to-one function from $B$ to $A$ by the Pigeonhole Principle (two of $1, 2, 3$ must go to the same number out of $1, 2$).  The relation $\lesssim$ is transitive; suppose the one-to-one functions $f:A \rightarrow B$ and $g:B \rightarrow C$ exist.  Then $A \lesssim B$ and $B \lesssim C$.  Let $x, y \in A$ such that $g(f(x)) = g(f(y))$.  Since $g$ is one-to-one, it follows that $f(x)$ must equal $f(y)$; in addition, since $f$ is one-to-one, it follows that $x = y$.  Hence, the composition of the functions $f$ and $g$ provides a one-to-one function from $A$ to $C$, showing that $A \lesssim C$.
+\\\indent If $A \lesssim B$ and $B \lesssim A$, then there exists a bijective function between $A$ and $B$.  Alternatively, $A$ and $B$ have the same cardinality.
+ 
+\problem{0}{1/4 page}
+What is one key difference between classes you enjoy and classes you don't enjoy?
+\\\\
+\noindent {\bf Solution.}
+Classes I don't enjoy don't have interesting problems like the ones in this pset!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PART{Charles and Erin}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{6}{2/3 page}
+Define the Fibonacci numbers as follows:
+\[ F_0 = 0 \]
+\[ F_1 = 1 \]
+\[F_n = F_{n-1} + F_{n-2} \text{ for all } n > 1\]
+Prove the following statement by induction:
+
+\subproblem For $n > 1$, $F_n$ equals the number of strings of length $n-2$ over alphabet $\Sigma = \{a, b\}$ that do not contain two consecutive $a$'s.
+\\\\
+\noindent {\bf Solution.}
+\\\indent First, we prove the base case.  Consider $n = 2$: the statement, ``$F_{2} (= 1)$ equals the number of strings of length $0$ over alphabet $\Sigma = \{a, b\}$ that do not contain two consecutive $a$'s'' is obviously true since there is only one string of length $0$ (the empty string).  Now consider $n = 3$: there are exactly two strings of length $1$ ($a$ and $b$) which both satisfy the given conditions.  ``Coincidentally'', $F_{3} = 2$!  Our two base cases have now been established.
+\\\indent Now we prove the inductive step.  Let $n > 3$.  Any string of length $n$ can end in $aa$, $ab$, $ba$, or $bb$.  The first case is invalid based on our conditions; having two consecutive $a$'s is disallowed.  Note the remaining cases; the string can either end in $b$ or end in $ba$.  This seems to give us our inductive step; indeed, appending a $b$ to a string of length $n-1$ cannot violate the condition disallowing two consecutive $a$'s, and neither can appending $ba$ to a string of length $n-2$.  Note that these cover all possible viable strings of length $n$.  Hence, the number of allowed strings of length $n$ is equal to the number of allowed strings of length $n-1$ added to the number of allowed strings of length $n-2$, which happens to be $F_{n-3} + F_{n-4}$, or $F_{n-2}$ as desired.
+ 
+\problem{2+2+2}{6 lines}
+Let $L_1$ be the language $\{ a^n : n \ge 0\}$ and $L_2$ be the language $\{x : x \in \{a, b\}^* \text{ and } |x| = 5\}$. Answer yes or no to the following questions.
+\subproblem Do the following sets contain the empty string $\vareps$?
+\begin{enumerate}
+\item $L_1 \cap L_2$
+\item $L_1 \cup L_2$
+\end{enumerate}
+
+\subproblem Do the following sets have the empty set $\emptyset$ as a subset?
+\begin{enumerate}
+\item $L_2$
+\item $L_1 \cap L_2$
+\end{enumerate}
+
+\subproblem Do the following sets contain $\emptyset$ as an element?
+\begin{enumerate}
+\item $L_1$
+\item $P(L_2)$
+\end{enumerate}
+\noindent {\bf Solution.}
+\\(A) 1. No, $L_{1} \cap L_{2}$ does not contain the empty string.  Note that if the empty string was contained in this set, it would have to be in $L_{2}$, which violates the condition $x\in L_{2}, |x| = 5$ since $|\vareps| = 0$.
+\\(A) 2. Yes, $L_{1}$ contains $\epsilon$ since $a^{0} = \vareps$ and therefore $\vareps \in L_{1} \cup L_{2}$.
+\\(B) Yes, every set contains the empty set as a subset.
+\\(C) 1. No; the elements of $L_{1}$ are not sets - hence, the empty set cannot be an element of $L_{1}$.
+\\(C) 2. Yes; the elements of $P(L_{2})$ are all sets; of course, the subset of $L_{2}$ in which none of the elements are included (the empty set) is an element of $P(L_{2})$, which is the set of all permutations of inclusions of elements in $L_{2}$.
+
+\problem{Challenge!! 3}{1/3 page}
+\textit{Note: On every problem set we will provide a challenge problem, generally significantly more dif- ficult than the other problems in the set, but worth only a few points. It is recommended that you attempt these problems, but only after completing the rest of the assignment.} \\\\
+Show that in any group of at least six people, either three of them are mutual friends (i.e. they all know each other) or three of them are mutual strangers (i.e., none of them know each other). You may assume that knowing is symmetric.
+\\\\
+\noindent {\bf Solution.}
+Denote a relationship between any two people in the group as ``red'' if the two people know each other, and ``blue'' otherwise.  Pick any person (let's call him $A$); since there are at least 6 people in the group, there are at least 5 other people in the group (and correspondingly, five relationships).  At least 3 of these must be red or blue (because of the Pigeonhole Principle); assume there are three red relationships.  Flip the colors in the following proof if there are three blue relationships instead.
+\\\indent Call the other ends of the three red relationships $B$, $C$, and $D$.  Between $B$, $C$, and $D$, if there are any red relationships (say between $B$ and $C$) then we are done since there is a red ``triangle'' between $A$, $B$, and $C$ (they all know each other).  Otherwise, there are instead three blue relationships between $B$, $C$, and $D$, in which case we are also done because $B$, $C$, and $D$ are all strangers to each other.
+
+\problem{0}{1 line}
+What is your favorite dining hall food?
+\\\\
+\noindent {\bf Solution.}
+Favorite food?  With the food at Harvard's dining halls?  You must be joking.  (I actually really like the burgers Mather's chefs make)
+
+\end{document}
