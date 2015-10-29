@@ -1,0 +1,220 @@
+%% Please fill in your name and collaboration statement here.
+\newcommand{\studentName}{Kevin Zhang}
+\newcommand{\collaborationStatement}{I collaborated with Tomoya Hasegawa and Mandela Patrick, got help from no one else, and used no other resources.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[solution, letterpaper]{cs121}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usetikzlibrary{automata,positioning}
+\begin{document}
+\header{5}{Due October 27, 2015 11:59pm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PART{Cecilia and Varun}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\problem{4+2+1}{1/2} Consider the Turing machine $M=(Q, \Sigma,
+\Gamma,\delta, q_0, q_{\mathrm{accept}}, q_{\mathrm{reject}})$
+where\begin{itemize}\item
+$Q = \{q_0, q_1, q_2, q_{\mathrm{accept}},q_{\mathrm{reject}}\}$,
+\item $\Sigma = \{a,b\}$ and $\Gamma =\{a,b,\sqcup\}$, \item The
+start, accept and reject states are $q_0$, $q_{\mathrm{accept}}$,
+and $q_{\mathrm{reject}}$ respectively. \item The function
+$\delta$ is given
+by:\end{itemize}\begin{center}\begin{tabular}{cc|r}$q$ & $\sigma$
+& $\delta(q, \sigma)$ \\ \hline\hline$q_0$ & $a$ & $(q_0, b,
+R)$\\$q_0$ & $b$ & $(q_1, a, R)$\\$q_0$ & $\sqcup$ &
+$(q_{\mathrm{reject}}, \sqcup, R)$\\$q_1$ & $a$ & $(q_2, b,
+R)$\\$q_1$ & $b$ & $(q_1, a, R)$\\$q_1$ & $\sqcup$ &
+$(q_{\mathrm{reject}}, \sqcup, R)$\\$q_2$ & $a$ & $(q_2, b,
+R)$\\$q_2$ & $b$ & $(q_2, a, R)$\\$q_2$ & $\sqcup$ &
+$(q_{\mathrm{accept}}, \sqcup,
+R)$\\\end{tabular}\end{center}
+
+\subproblem Give the sequence of configurations describing $M$'s computation
+on the string $aabba$
+
+\subproblem Describe $L(M)$.
+
+
+\begin{solution}
+\subsolution The sequence of configurations is given by $q_0aabba$, $bq_0abba$, $bbq_0bba$, $bbaq_1ba$, $bbaaq_1a$, $bbaabq_2\sqcup$, $bbaab\sqcup q_{accept}$.  $aabba$ is accepted.
+\subsolution The only accept state results when a configuration contains $q_2\sqcup$.  $q_2$ is only reachable if a configuration contains $q_1a$, and $q_1$ is only reachable if a configuration contains $q_0b$.  This sequence of events tells us that $L(M) = \{w: w$ has a $b$ before an $a$ somewhere inside it$\}$.
+\end{solution}
+
+\pagebreak
+
+\problem{4}{1/4}
+A Modern Turing Machine (MTM), instead of $\{L,R\}$, has $\{L_k, R_k\}$ (move the head left or right $k$ spaces on the tape, for any integer $k$ encoded in the rule in the MTM). Prove that the MTMs are equivalent in power to the TMs. In other words, any MTM can be converted to a TM with an equivalent language, and vice versa.
+
+\begin{solution}
+Every TM is an MTM with $k = 1$, so converting from a TM to an MTM is easy.  It remains to figure out some construction from an MTM to a TM.  This is easy to do if we insert some (a lot) transition states.  Let's take every rule in the MTM and convert it as follows.  If the rule is defined as $\delta(q,\sigma) = (q',\sigma',L_k)$ (something similar follows for $R_k$), we insert $k-1$ new states and define the rules as follows:
+\begin{itemize}
+	\setlength\itemsep{0cm}
+	\item Define new states $q_{q\sigma i}, 1 \leq i < k$
+	\item $\delta(q,\sigma)=(q',\sigma',L_k)$, the original rule in the MTM, becomes $\delta(q,\sigma)=(q_{q\sigma 1}, \sigma', L)$
+	\item $\delta(q_{q\sigma i}, x) = (q_{q\sigma (i+1)}, x, L)$ for all $x \in \Gamma$, where $1 \leq i < k-1$
+	\item $\delta(q_{q\sigma (k-1)}, x) = (q', x, L)$ for all $x \in \Gamma$
+\end{itemize}
+
+What this does is insert $k-1$ states that do essentially nothing except move one place in the correct direction and transition to the next state.  The transition $q \mapsto q'$ becomes $q \mapsto q_{q\sigma 1} \mapsto q_{q\sigma 2} \mapsto \cdots \mapsto q_{q\sigma (k-1)} \mapsto q'$.  The result is a TM that has an large number of "useless" states that do not convey much information but that still recognizes the same language as the MTM.
+
+*N.B. The case $k = 0$ is handled by simply having the TM move one space to the right then one space to the left.
+\end{solution}
+
+
+\problem{2 + 2 + 1}{1/2 page}
+
+A Democratic rule of a CFG $(V, \Sigma, R, S)$ is one whose right-hand side is a member of $V\Sigma^*\cup\Sigma^*$, that is, only the leftmost symbol can be a nonterminal. Republican rules are defined analogously where only the rightmost symbol can be a nonterminal. Show that a grammar with only Democratic rules, or only Republican rules, generates a regular language, but a grammar with a mixture of Democratic and Republican rules may generate a non-regular language.
+
+\begin{solution}
+We'll examine the Democratic case first.  Let the CFG be $(V, \Sigma, R, S)$.  We can construct an NFA for this grammar as follows:
+\begin{itemize}
+	\setlength\itemsep{0cm}
+	\item $Q = V$
+	\item $\Sigma = \Sigma$
+	\item $S = S'$, where $S'$ is a new state we define
+	\item Transitions in the DFA correspond to productions between nonterminals; if $A \mapsto Bs$, then a transition in the DFA exists from $B$ to $A$ on $s$; i.e. $\delta(B, s) = A$.  This takes care of all rules with non-terminals in them.
+	\item Rules of the form $X \mapsto s$ are taken care of by the transition $\delta(S', s) = X$ where $F$ is the start state we defined above.
+	\item $F = S$; i.e. the original start state becomes the final state.
+\end{itemize}
+\end{solution}
+
+For example, if we had the rules $S \mapsto Ab, A \mapsto Aa | B, B \mapsto b$, the NFA's transition function would be given by $\delta(S', b) = B, \delta(B, \vareps) = A, \delta(A, a) = A, \delta(A, b) = S$.
+
+Similarly, we can define such an NFA for Republican grammars.  Let the CFG be $(V, \Sigma, R, S)$.  We can construct an NFA for this grammar as follows:
+\begin{itemize}
+	\setlength\itemsep{0cm}
+	\item $Q = V$
+	\item $\Sigma = \Sigma$
+	\item $S = S$
+	\item All rules $A \mapsto sB$ are converted to $\delta(A, s) = B$
+	\item All rules $A \mapsto s$ are converted to $\delta(A, s) = F$, where $F$ is a single state that we define
+	\item $F = F$.
+\end{itemize}
+
+For example, if we had the rules $S \mapsto A, A \mapsto aA | B, B \mapsto b$, the NFA's transition function would be given by $\delta(S, \vareps) = A, \delta(A, a) = A, \delta(A, \vareps) = B, \delta(B, b) = F$.
+
+For the last part of this proof, we just need to find a grammar with a mixture of Democratic and Republican rules can generate a non-regular language.  Consider the rules $S \mapsto aA, A \mapsto Bb, B \mapsto aA | \vareps$.  With a bit of analysis, one can actually show that this generates the language $a^nb^n, n \geq 0$, which is the canonical non-regular language we have seen so much in this class.
+
+\problem{7}{3/4 page} Let us define EvenPalindrome$(L)=\{ww^{R} : w \in
+L\}$. Show that if $L$ is regular, then EvenPalindome$(L)$ is
+context-free.  Note that this is not the same as the language of all even palindromes, which is actually just EvenPalindrome($\Sigma^*$). Explain briefly how your solution works. You need not provide a formal proof of correctness.
+
+\begin{solution}
+Since $L$ is regular, there exists a CFG that produces exactly $L$; in fact, from the reading in Sipser, it is actually possible to construct a right-linear CFG (a "Republican" one, if you will).  Let this CFG be $(V, \Sigma, R, S)$.  This tells us that it is possible to express $L$ purely in terms of rules of the form $A \mapsto sB$ or $A \mapsto s$.  We can construct a CFG that accepts EvenPalindrome($L$) as follows:
+\begin{itemize}
+	\setlength\itemsep{0cm}
+	\item $V' = V$
+	\item $\Sigma' = \Sigma$
+	\item $S' = S$
+	\item Rules in $R$ of the form $A \mapsto s$ are transformed into $A \mapsto ss^R$
+	\item Rules in $R$ of the form $A \mapsto sB$ are transformed into $A \mapsto sBs^R$.
+\end{itemize}
+
+This works by taking every production rule that adds some characters to the current string and transforming it into a rule that adds the same characters both in order and in reverse order around the center of the string.  For example, if we had the set of rules $S \mapsto aA, A \mapsto aA | B, B \mapsto b$, then we would have $S \mapsto aAa, A \mapsto aAa | B, B \mapsto bb$.  The original set of rules generates $a^*b$, and the second set of rules generates $a^nbba^n, n \geq 0$, as required.
+\end{solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PART{Madhu and Zhengyu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\problem{CHALLENGE!! (3)} {1/2 page}
+A Boring Turing Machine (BTM) can only write $\#$ on the tape (assume $\# \notin \Sigma$). 
+Prove that the BTMs are equivalent in power to the TMs.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{6} {1/3 page}
+
+\noindent Show that every infinite Turing-recognizable language
+has an infinite decidable sublanguage.
+
+\begin{solution}
+\indent The idea here is to determine some property of a language that makes it easy to construct a decisive TM for it.  We look at enumerators for this; since they output all of the strings of a language, we can use the strings outputted by the enumerator to determine whether an input is in the language or not.  To be more exact, we can compare an input string against every output of the enumerator to see if there's a match; if there is, we accept.  
+
+There is one nuance, which is that we need some way to deciding to reject an input string; if we don't, the TM will continue comparing against the enumerator's output strings until the enumerator stops (or, if it doesn't, the TM will never terminate).  To solve this, we need to figure out some way to determining when we should stop reading from the enumerator's output.  In other words, at some string $s_i$ from the enumerator, we need some way to compare an input string $s$ to $s_i$ and decide to reject.  One way we can do this is require that the enumerator output the strings in order of nondecreasing length; in this way, if we start reading strings from the enumerator that have longer length than $s$, we can stop and reject.
+
+Using this, we give the following construction for an infinite, decidable sublanguage.  Suppose we have an infinite Turing-recognizable language $L$ with enumerator $E$.  We construct $E'$ as follows:
+\begin{itemize}
+	\setlength\itemsep{0cm}
+	\item Run $E$.
+	\item For each string that comes out of E,
+	\begin{itemize}
+		\item If the string has equal or greater length than the last string printed out by $E'$, have $E'$ print out the string.
+		\item Otherwise, ignore and continue.
+	\end{itemize}
+\end{itemize}
+
+This process constructs an enumerator that outputs strictly nondecreasing length strings, which, by the above argument, results in an outputted language that is decidable.  Moreover, note that this language must have infinite length, because $E$ is infinite and therefore, if it has already outputted a string of length $n$, eventually must output a string of length $n+1$ (because the starting language is infinite and there are only finitely many strings of length at most $n$).  Hence, the above construction gives us an infinite decidable sublanguage, and we are done.
+\end{solution}
+
+
+
+\problem{4+2+4}{1 page}
+
+Let $G = (V, \Sigma, R, S)$ where $V=\{S,V\}$, $\Sigma = \{a,b\}$, and $R$ is the set of rules: 
+
+$$ 
+S \rightarrow bSS \| aS \| aV $$
+$$ V \rightarrow aVb \| bVa \| VV \| \varepsilon 
+$$
+
+\subproblem
+Transform $G$ into an equivalent grammar $G'$ in Chomsky normal form. Show your work for each step of this conversion, but long justifications for each step are not necessary.
+
+\subproblem 
+Explain in English what language the grammar $G$ generates. (One clearly worded sentence is fine; thorough justification is not necessary, but it might get you some partial credit if your answer is wrong.)
+
+\subproblem
+Check whether the strings $abaab$ and $bbabaa$ are generated by $G$, using the recognition algorithm for grammars in Chomsky normal form given in class. Show the complete filled-in matrix for each of the two strings.
+
+
+\begin{solution}
+\subsolution First, we add the new start variable $S_0$ and the rule $S_0 \rightarrow S$.  Next, we remove $\vareps$-rules; $V\rightarrow \vareps$ gets removed and $S \rightarrow aV$ becomes $S \rightarrow aV | a$.  Now we remove unit rules; $S_0 \rightarrow S$ becomes $S_0 \rightarrow bSS | aS | aV | a$ instead.  The last step is converting all remaining rules into the form $A \rightarrow BC$ by adding new nonterminals.  Hence, $S_0 \rightarrow bSS$ becomes $S_0 \rightarrow BC$, $B \rightarrow b$, and $C \rightarrow SS$; $V \rightarrow aVb$ becomes $V \rightarrow AD$, $A \rightarrow a$, $D \rightarrow VE$, and $E \rightarrow b$; $V \rightarrow bVa$ becomes $V \rightarrow BF$, $F \rightarrow VA$.  In total, we have the rules,
+
+\begin{center}
+	$S_0 \rightarrow BC | AS | AV | a$\\
+	$S \rightarrow BC | AS | AV | a$\\
+	$A \rightarrow a$\\
+	$B \rightarrow b$\\
+	$C \rightarrow SS$\\
+	$V \rightarrow AD | BE | AB | BA | VV$\\
+	$D \rightarrow VB$\\
+	$E \rightarrow VA$\\
+\end{center}
+
+\subsolution The given first set of rules for $S$, if we replace the $V$ with a $\vareps$, results in strings that always have at least one more $a$'s than $b$'s.  We can see this because $S$'s are eliminated by replacing them with $aV$'s, and $b$'s can only be inserted by increasing the number of $S$'s by 1 as well.  The second set of rules for $V$ describes all strings with equal numbers of $a$'s and $b$'s.  $V$ can be inserted almost anywhere because of the rule $S \rightarrow aV$.  This language is the language of strings that have at least one more $a$'s than $b$'s.  We can thoroughly prove this if we wish by reverse-constructing the production rules for any string.
+
+\subsolution 
+\begin{tabular}{|c|c|c|c|c|}\hline
+$S,S_0$		&			&			&			&\\\hline
+$C,S,S_0$		&$V$		&			&			&\\\hline
+$E$			&$E,S,S_0$	&$S,S_0$		&			&\\\hline
+$V$			&$V$		&$S,S_0,C$	&$V$		&\\\hline
+$A,S,S_0$		&$B$		&$A,S,S_0$	&$A,S,S_0$	&$B$\\\hline
+$a$			&$b$			&$a$			&$a$			&$b$\\\hline
+\end{tabular}
+\\\\$abaab$ is accepted because $S_0$ is in the topmost left cell.
+\vspace{0.4cm}
+
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+$V$			&			&			&			&			&\\\hline
+$-$			&$E,S,S_0$	&			&			&			&\\\hline
+$-$			&$V$		&$C$		&			&			&\\\hline
+$-$			&$D$		&$E,S,S_0$	&$E$		&			&\\\hline
+$-$			&$V$		&$V$		&$V$		&$C,S,S_0$	&\\\hline
+$B$			&$B$		&$A,S,S_0$	&$B$		&$A,S,S_0$	&$A,S,S_0$\\\hline
+$b$			&$b$			&$a$			&$b$			&$a$			&$a$\\\hline
+\end{tabular}
+\\\\$bbabaa$ is not accepted because $S_0$ is not in the topmost left cell.
+\end{solution}
+\end{document}

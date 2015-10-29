@@ -1,0 +1,119 @@
+%% Please fill in your name and collaboration statement here.
+\newcommand{\studentName}{**FILL IN YOUR NAME HERE**}
+\newcommand{\collaborationStatement}{**FILL IN YOUR COLLABORATION STATEMENT HERE \\ (See the syllabus for information)**}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[solution, letterpaper]{cscie121}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usetikzlibrary{automata,positioning}
+\begin{document}
+\header{4}{Due October 23, 2015}
+
+
+\problem{3+3+3} {1/2 page}
+For each of the following languages, state whether the language is context-free or not. If context-free, give a context-free grammar that generates the language (or construct a pushdown automaton that recognizes the language). If not context-free, write a short proof to justify.
+
+\subproblem $\{a^{n} : n \text{ is a prime number}\}$. 
+\subproblem $\{a^nb^m : n,m\in \mathbb{N},  n \neq m\; \textrm{and}\; n \neq 2m\}$.
+\subproblem
+$\{a^{n}b^{n}c^{n} : n\in\mathbb{N}\} \cup \{(ab)^n(ca)^n(cb)^n : n\in\mathbb{N}\}$. 
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\problem{6}{1/2 page}
+Draw the state diagram of a PDA that recognizes the language $\{w :$ the number
+of $a$'s in $w$ is greater than two times the number of $b$'s in $w\}$. Use
+Sipser's notation to label the transitions. (That is, use labels in the form
+$x,y\to z$ to mean that when you read an $x$ from your string and pop a $y$
+from the stack, follow the transition and push a $z$ onto the stack.) Explain
+in a few sentences why your construction is correct (no need to prove
+formally).
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\problem{6}{1/2 page}
+A pushdown automaton (PDA) is made by equipping an NFA with a stack. In this
+problem, we consider an NFA equipped with a queue -- a Queue Automaton (QA).
+The queue supports the following two operations:
+\begin{enumerate}
+  \item {\em Pop.} Read the leftmost symbol of the queue and remove it from
+    the queue.
+  \item {\em Push.} Write a symbol to the rightmost end of the queue.
+\end{enumerate}
+
+In a Queue Automaton, a transition $(q, \sigma, \gamma)\rightarrow (q',
+\gamma')$ means ``if the machine is in state $q$, after reading $\sigma$ from
+the input string and popping $\gamma$ from the queue, push
+$\gamma'$ onto the queue and transition to state $q'$''. Note that
+$\varepsilon$-transitions are still allowed. For example, $(q, \varepsilon,
+\gamma)\rightarrow (q', \gamma')$ doesn't read anything from the input string.
+You can also use an $\varepsilon$ for $\gamma$ to indicate that nothing should
+be popped from the queue, and an $\varepsilon$ for $\gamma'$ to indicate that
+nothing should be pushed onto the queue. Initially the queue is empty.
+
+We saw in class that $L=\{a^{2^n} : n \in \Nat \}$ is not Context-Free, so
+there isn't a PDA that recognizes it. Construct a Queue Automaton that {\em
+does} recognize $L$ (give the 6-tuple for it) and provide a short explanation
+for why it works.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\problem{4+6+(2)}{1 page}
+Recall that allowing nondeterminism did not add any power to finite 
+automata---any language that could be accepted by an NFA could also be 
+accepted by a DFA. In this problem, you will show that this is \emph{not 
+the case} for PDAs by defining Deterministic PDAs (DPDAs). \\ 
+
+DPDAs are similar to PDAs with a few subtle differences: 
+\begin{itemize}
+\item Most notably, they are deterministic in their transitions and
+  stack operations.  Note that this means that they don't allow
+  transitions on $\varepsilon$.  In one step, a DPDA reads exactly one
+  input symbol, reads and pops exactly one symbol from the top of the
+  stack, and pushes a {\em string} onto the stack.
+\item Instead of starting with an empty stack, they start with a
+  special symbol, $\$$, as the lone symbol on the stack. This way a
+  DPDA can always know when it has reached the bottom of its
+  stack. The $\$$ symbol can never be erased; that is, any transition
+  reading $\$$ \emph{must} push it back on the stack.
+\end{itemize}
+
+\subproblem  Formalize the above by definining a DPDA as a 7-tuple $(Q,
+\Sigma, \Gamma, \$, \delta, q_0, F)$, filling in the requirements of
+each component.  You can refer to the definitions of a regular PDA for
+the components that don't change.
+\subproblem Now you will show that DPDAs are more powerful than finite automata. Consider the language $\textsc{Majority} =\{w: w \text{ contains more
+$a$'s than  $b$'s}\}$. Construct a DPDA that recognizes $\textsc{Majority}$. Prove that no finite automata recognizes $\textsc{Majority}$.
+\subproblem (CHALLENGE!!! Optional, worth 2 extra points.) Show that DPDAs are less powerful than PDAs.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{8}{3/4 page}
+If $L$ is a language, then {\sc Permutation}$(L) = \{ x:
+$ there exists a string $w \in L$ such that $|x|=|w|$ and the number
+of occurrences of any letter in $w$ and $x$ are the same$\}$. Show
+that if $L$ is regular, then {\sc Permutation}(L) is context free
+when $\Sigma = \{a, b\}$. (Hint: Your proof must use the fact that there are only two symbols in the alphabet---the proof does not generalize to the case $\lvert \Sigma\rvert >2$.)
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+\end{document}
+
