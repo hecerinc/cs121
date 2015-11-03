@@ -1,0 +1,78 @@
+%% Please fill in your name and collaboration statement here.
+\newcommand{\studentName}{**FILL IN YOUR NAME HERE**}
+\newcommand{\collaborationStatement}{**FILL IN YOUR COLLABORATION STATEMENT HERE \\ (See the syllabus for information)**}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[solution, letterpaper]{cscie121}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usetikzlibrary{automata,positioning}
+\begin{document}
+
+\header{6}{November 6, 2015}
+
+
+\problem{6}{1/3 page}
+Prove that the class of decidable languages is closed under union. 
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\problem{6}{1/3 page}
+Prove that the class of Turing-recognizable languages is closed under intersection.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{3 + 5}{5 lines, 1/3 page}
+\subproblem Consider $L = \{\langle M \rangle: M \text{ is a TM that accepts no strings shorter than } 42 \text{ characters in length}\}$. 
+ 
+Prove that L is not decidable. Hint: Consider Rice's Theorem.
+
+\subproblem Use that the fact that $L$ is not decidable to prove that $L$ is not recognizable.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\problem{3}{5 lines}
+Define $\mathsc{Prefix}(L) = \{ x : xy \in L \text{ for some }y \in \Sigma^*\}$. Show that if $L$ is Turing-recognizable, then $\mathsc{Prefix}(L)$ is Turing-recognizable.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{8} {2/3 page}
+Let $L=\{\langle M\rangle:$ $M$ moves left on the tape at some point when run on $\varepsilon\}$. Show that $L$ is decidable.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{10} {3/4 page}
+Show that a language $L_1$ is Turing-recognizable if and only if there exists some decidable language $L_2$ such that $L_1 = \{x : \text{there exists $y$ such that $\langle x,y \rangle \in L_2$}\}$. \\ \\
+Note that the $\langle \rangle$ notation signifies that you are ``stringify-ing'' the contents within the bracket, since Turing Machines take strings as input. \\ \\ 
+(Hint: Imagine that $y$ gives you information about an accepting computation on $x$, if one exists.) \\ \\
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{Challenge!! (3)}{1/3 page}
+Show that every infinite regular language has a
+subset that is Turing-recognizable but undecidable.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\end{document}
+
