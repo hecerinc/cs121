@@ -1,0 +1,101 @@
+%% Please fill in your name and collaboration statement here.
+\newcommand{\studentName}{**FILL IN YOUR NAME HERE**}
+\newcommand{\collaborationStatement}{**FILL IN YOUR COLLABORATION STATEMENT HERE \\ (See the syllabus for information)**}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[solution, letterpaper]{cscie121}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usetikzlibrary{automata,positioning}
+\begin{document}
+\header{7}{November 13, 2015}
+
+
+\problem{4+4+4}{1 page}
+Indicate whether each of the following languages is decidable. If it is
+decidable, give a \textbf{high-level}\footnote{See Piazza for an explanation of
+what a high-level description of a TM entails.} (but complete) description of
+a Turing Machine that decides it. Otherwise, prove it is not decidable by
+contradiction: show that if a decider $M_L$ existed for it, one could use $M_L$
+to construct a new decider $M_L'$ that decides a problem we have proven to, in
+fact, be undecidable (such as $\textsc{Halt}_{\textsf{TM}}$). You do not need
+to define the mapping reduction function $f$ for this problem.\\
+
+\noindent In all cases, let $T$ be a deterministic one-tape TM.
+ 
+\subproblem $L=\{\left<T\right>:$ $T$ takes more than 53 steps on at least one
+input.$\}$ 
+
+\subproblem $L=\{\left<T\right>:$ $T$ takes more than 77 steps on at least one
+input accepted by $T$.$\}$
+
+\subproblem $L=\{\left<T\right>:$ $T$ takes more than 824 steps on all inputs
+accepted by $T$.$\}$
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{3+3}{1/2 a page}
+In the near future you're working as an engineer at Google/Microsoft/Facebook when your manager asks you to write the following two programs. Is this a problem? Provide a proof for your argument.
+
+\subproblem Take another program's code as input and decide if that program is implemented with the shortest amount of code possible.
+
+\subproblem Take another program's code and remove all inaccessible (dead) code from it.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{4}{1/3 a page}
+
+Let $A=\{\left<R,S\right>: \text{ $R$ and $S$ are regular expressions
+and $L(R)
+\subseteq L(S)$ \}}$. Show that $A$ is decidable by giving a high level description. 
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+
+\problem{6}{1/3 page}
+
+Prove that any decidable language $L$ is mapping reducible to any non-trivial decidable language $L'$. (Any decidable language other than $\Sigma^*$, $\emptyset$)
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\problem{6}{1/3 page}
+
+For any Turing Machine $M$, the language accepted by $M$, $L(M)$ is always
+recursively enumerable. Let $M_F$ be the machine created by flipping the accept
+and reject states of $M$. Prove that $L(M_F)$ is not always recursive whenever $L(M)$ is recursive.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\problem{6}{1/3 page}
+A computation of a Turing Machine \emph{loops} if it repeats a configuration, that
+is, re-enters the same state with the identical tape and the head
+position. Prove that if every non-halting computation of $M$ loops, then $L(M)$ is decidable.
+In particular, you need to give a high level description of a Turing machine that 
+decides $L(M)$, and provide a short justification. 
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+
+
+\end{document}

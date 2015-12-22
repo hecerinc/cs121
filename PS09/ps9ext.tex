@@ -1,0 +1,118 @@
+%% Please fill in your name and collaboration statement here.
+\newcommand{\studentName}{**FILL IN YOUR NAME HERE**}
+\newcommand{\collaborationStatement}{**FILL IN YOUR COLLABORATION STATEMENT HERE \\ (See the syllabus for information)**}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[solution, letterpaper]{cscie121}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usetikzlibrary{automata,positioning}
+\begin{document}
+\header{9}{November 29, 2015}
+
+\newcommand{\PSPACE}{\mathrm{PSPACE}}
+\newcommand{\NPSPACE}{\mathrm{NPSPACE}}
+\newcommand{\AD}{\mathsc{Amicable Divorce}}
+\newcommand{\HD}{\mathsc{Hostile Divorce}}
+\renewcommand{\P}{\mathrm{P}}
+
+\problem{5}{1/3 of a  page}
+
+Show that if ${\cal P} = {\cal NP}$ then every non-trivial language $L \in {\cal NP}$ is ${\cal NP}$-complete. (Non-trivial languages are languages other than $\Sigma^*, \emptyset$)
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{10}{1 page}
+
+
+A {\it pattern} is a string over the alphabet $\{0,1, ?\}$.  Say that
+        a
+        pattern $\pi$ {\it covers} a string $w$ over $\{0,1\}$ if
+        $w$ can be obtained from $\pi$ by replacing each occurrence of
+        $?$ in $\pi$ with either $0$ or $1$.  (For example, $0??1$ covers the
+        four strings $0001$, $0011$, $0101$, $0111$.)
+
+        We define the problem {\sc Pattern} as the set $\{\Pi : \Pi$ is a set
+        of patterns, each of length $n$, such that there exists a string $s$
+        of length
+        $n$ over $\{0,1\}$ where no pattern in $\Pi$ covers $s\}$.
+
+        Show that {\sc Pattern} is ${\cal NP}$-complete.  (\emph{Hint}:
+        reduce from $n$-variable {\sc 3SAT}.)
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{(3)+5}{1 page}
+\textbf{Note: Part A of this problem is optional extra credit; Part B is required.}\\
+If a divorce is friendly, the spouses often have the problem of trying to divide up the property evenly. If the divorce is hostile, instead of dividing the property two ways, the property is often divided three ways: between the first spouse, the second spouse, and the various lawyers. Define {\sc Amicable Divorce} as follows: Given a set of numbers, is it possible to split the set into two subsets such that every element of the original set is in exactly one of the two subsets and the sum of each subset is the same?
+Define {\sc Hostile Divorce} as follows: Given a set of numbers, is it possible to split the set into three subsets such that every element of the original set is in exactly one of the subsets and the sum of each subset is the same? 
+
+\subproblem (CHALLENGE! Extra Credit) Show that $\AD$ is ${\cal NP}$-complete.
+
+\subproblem Assuming that $\AD$ is ${\cal NP}$-complete, show that {\sc Hostile Divorce} is ${\cal NP}$-complete.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+       
+\problem{3+8+3}{1 page} A language is ${\cal NP}${\em -hard} if all
+problems in ${\cal NP}$ $\le_p$-reduce to it. (Recall that ${\cal NP}$-completeness also requires that the language is in ${\cal NP}$.) Let:
+
+$$A=\{\left<M\right>\text{ : $M$ is a DFA and $M$ accepts some string.}\}$$
+$$B=\{\left<M_1,M_2,...,M_k\right>\text{ : Each $M_i$ is a DFA and
+all of the $M_i$ accept some common string.} \}$$
+
+\subproblem Show that $A \in {\cal P}$.
+
+\subproblem Show that $B$ is ${\cal NP}$-hard by giving a reduction from
+some ${\cal NP}$-complete problem to $B$.
+
+\subproblem We can convert an instance of $B$ into an instance of
+$A$ by applying the product construction (See p.45-46 of {\em
+Sipser}) $k-1$ times in succession. Does this show that ${\cal P} = {\cal NP}$? Why
+or why not?
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+\problem{6}{1/2 page}
+Let $\text{DoubleSAT} = \{ \phi: \phi$ has at least two satisfying
+assignments$\}$. Show that $\text{DoubleSAT}$ is ${\cal NP}$-complete.
+
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+        
+        
+
+\newcommand{\CoNP}{ \text{co-}{\cal NP}}
+\problem{8}{1/2 page}
+A strong nondeterministic TM is one that has three possible
+halt states:  ``yes'', ``no'', or ``maybe''.  We say such a machine decides $L$ in
+polynomial time iff all computations run in polynomial time, and if the
+following holds: if $x\in L$, then all computations end up with ``yes'' or
+``maybe," and at least one ends up ``yes''.  If $x\notin L$, then all
+computations end up in ``no'' or ``maybe'', but at least one ends up ``no''.
+Prove that $L$ is decided by a strong nondeterministic TM in polynomial time
+if and only if $L\in{\cal NP}\cap\CoNP$.
+
+\begin{solution}
+  % Write your answer here.
+\end{solution}
+
+
+\end{document}
+
